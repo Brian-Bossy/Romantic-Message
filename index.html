@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Special Message For You 💖</title>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap');
+    
+    :root {
+        --primary: #ff6b8b;
+        --secondary: #ffb3c1;
+        --dark: #5a2a38;
+        --light: #fff9fb;
+    }
+    
+    body {
+        font-family: 'Montserrat', sans-serif;
+        background: linear-gradient(135deg, #fff5f7 0%, #ffeef2 100%);
+        margin: 0;
+        padding: 0;
+        color: #333;
+        overflow-x: hidden;
+        line-height: 1.6;
+    }
+    
+    .container {
+        max-width: 700px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    
+    h1, h2, h3 {
+        font-family: 'Playfair Display', serif;
+        color: var(--dark);
+        text-align: center;
+    }
+    
+    h1 {
+        font-size: 2.8rem;
+        margin: 30px 0;
+        position: relative;
+        display: inline-block;
+    }
+    
+    h1:after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        height: 3px;
+        background: linear-gradient(90deg, var(--primary), var(--secondary));
+        border-radius: 3px;
+    }
+    
+    h2 {
+        font-size: 2rem;
+        margin: 25px 0;
+        color: var(--primary);
+    }
+    
+    .section {
+        background-color: white;
+        border-radius: 15px;
+        padding: 40px;
+        margin-bottom: 30px;
+        box-shadow: 0 15px 30px rgba(210, 54, 105, 0.1);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .section:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px rgba(210, 54, 105, 0.15);
+    }
+    
+    .section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 5px;
+        height: 100%;
+        background: linear-gradient(to bottom, var(--primary), var(--secondary));
+    }
+    
+    .love-letter {
+        font-size: 1.1rem;
+        margin: 25px 0;
+        padding: 0 10px;
+        position: relative;
+    }
+    
+    .love-letter p {
+        margin-bottom: 20px;
+        position: relative;
+        padding-left: 30px;
+    }
+    
+    .love-letter p::before {
+        content: "❤";
+        position: absolute;
+        left: 0;
+        top: -2px;
+        color: var(--primary);
+        font-size: 1.2rem;
+    }
+    
+    .btn {
+        background: linear-gradient(45deg, var(--primary), var(--secondary));
+        color: white;
+        border: none;
+        padding: 12px 30px;
+        border-radius: 50px;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: all 0.3s;
+        margin: 20px auto;
+        display: block;
+        font-weight: 600;
+        box-shadow: 0 5px 15px rgba(255, 107, 139, 0.4);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    
+    .btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(255, 107, 139, 0.6);
+    }
+    
+    .hidden {
+        display: none;
+    }
+    
+    .slideshow {
+        position: relative;
+        max-width: 500px;
+        margin: 40px auto;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+    
+    .slide {
+        display: none;
+        width: 100%;
+    }
+    
+    .slide img {
+        width: 100%;
+        border-radius: 10px;
+        transition: transform 0.5s;
+    }
+    
+    .slide img:hover {
+        transform: scale(1.03);
+    }
+    
+    .prev, .next {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: auto;
+        padding: 20px;
+        color: white;
+        font-weight: bold;
+        font-size: 24px;
+        background-color: rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+        border-radius: 0 5px 5px 0;
+        user-select: none;
+        transition: background-color 0.3s;
+    }
+    
+    .next {
+        right: 0;
+        border-radius: 5px 0 0 5px;
+    }
+    
+    .prev:hover, .next:hover {
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+    
+    .dot-container {
+        text-align: center;
+        padding: 15px;
+    }
+    
+    .dot {
+        height: 15px;
+        width: 15px;
+        margin: 0 5px;
+        background-color: #ddd;
+        border-radius: 50%;
+        display: inline-block;
+        transition: background-color 0.6s ease;
+        cursor: pointer;
+    }
+    
+    .active {
+        background-color: var(--primary);
+    }
+    
+    .fool-page {
+        background: linear-gradient(45deg, #ffcc00, #ffde59);
+        color: #5a3e00;
+        padding: 40px;
+        border-radius: 15px;
+        animation: pulse 2s infinite;
+        text-align: center;
+    }
+    
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.02); }
+        100% { transform: scale(1); }
+    }
+    
+    .emoji {
+        font-size: 3rem;
+        margin: 20px 0;
+        display: block;
+    }
+    
+    .heart-beat {
+        animation: heartbeat 1.5s infinite;
+    }
+    
+    @keyframes heartbeat {
+        0% { transform: scale(1); }
+        25% { transform: scale(1.1); }
+        50% { transform: scale(1); }
+        75% { transform: scale(1.1); }
+        100% { transform: scale(1); }
+    }
+    
+    .confetti {
+        position: fixed;
+        width: 10px;
+        height: 10px;
+        background-color: var(--primary);
+        border-radius: 50%;
+        animation: fall 5s linear infinite;
+        z-index: 1000;
+    }
+    
+    @keyframes fall {
+        0% {
+            transform: translateY(-100vh) rotate(0deg);
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(100vh) rotate(360deg);
+            opacity: 0;
+        }
+    }
+
+    #noBtn:disabled {
+        pointer-events: none;
+        opacity: 0.5;
+    }
+
+    .btn {
+        transition: all 0.2s ease;
+    }
+
+    #noBtn:hover {
+        transform: translateX(20px);
+    }
+
+    #noBtn:active {
+        transform: translateX(0px);
+    }
+</style>
+
+</head>
+<body>
+    <div class="container">
+        <h1 class="heart-beat">My Heart's Message</h1>
+        
+        <div id="section1" class="section">
+            <h2>When I First Saw You cheeky vian...</h2>
+            <div class="love-letter">
+                <p>From the moment our eyes met, time seemed to pause just for us. There was something about your smile that made my heart skip a beat, like it had found its rhythm after years of silence.</p>
+                
+                <p>Your laughter became my favorite melody, playing on repeat in my mind long after we parted. I found myself searching for your face in crowded rooms, drawn to you like the moon pulls the tides.</p>
+                
+                <p>Every conversation with you felt like uncovering hidden treasure - each word more precious than the last. I realized then that you weren't just another person in my life; you were becoming my favorite part of it.</p>
+            </div>
+            <button class="btn" onclick="nextSection()">Continue Reading →</button>
+        </div>
+        
+        <div id="section2" class="section hidden">
+            <h2>My imagination with you 🤭🤭</h2>
+            <div class="slideshow">
+                <div class="slide fade">
+                    <img src="1.jpg" alt="Memory 1">
+                </div>
+                <div class="slide fade">
+                    <img src="2.jpg" alt="Memory 2">
+                </div>
+                <div class="slide fade">
+                    <img src="3.jpg" alt="Memory 3">
+                </div>
+
+                <div class="slide fade">
+                    <img src="4.jpg" alt="Memory 4">
+                </div>
+                <a class="prev" onclick="plusSlides(-1)">❮</a>
+                <a class="next" onclick="plusSlides(1)">❯</a>
+            </div>
+            <div class="dot-container">
+                <span class="dot" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+                <span class="dot" onclick="currentSlide(3)"></span>
+            </div>
+            
+            <div class="love-letter">
+                <p>Remember that time we stayed up talking until sunrise? That was when I knew - you were the missing piece I didn't realize I was searching for.</p>
+                
+                <p>Our adventures together, whether grand or simple, have become the highlights of my life's story. Your hand in mine feels like home, and your voice is my favorite sound in this noisy world.</p>
+                
+                <p>I've collected these moments like precious gems, each one shining brighter because you were there to share it with me. You have this incredible way of making ordinary days feel extraordinary.</p>
+            </div>
+            <button class="btn" onclick="nextSection()">👉🏻check Next→</button>
+        </div>
+        
+        <div id="section3" class="section hidden">
+            <h2>What My Heart Wants to Say</h2>
+            <div class="love-letter">
+                <p>Life with you is like a beautiful song that never ends, each day a new verse more wonderful than the last. I find myself falling for you over and over again - your kindness, your strength, the way you see beauty in things others overlook.</p>
+                
+                <p>Your presence in my life has been the greatest gift I never knew to ask for. You've shown me love isn't about grand gestures, but about the quiet moments when your hand finds mine without looking, or how your eyes light up when you talk about what you love.</p>
+                
+                <p>I want to wake up to your smile more often than not. I want to be the one who makes your bad days better and your good days brighter. I want to build something beautiful with you - something that lasts.</p>
+            </div>
+            
+            <button class="btn" onclick="showProposal()">🤭👉🏻 Check next →</button>
+        </div>
+        
+        <div id="proposal" class="section hidden">
+            <h2>🤭Will You Be Mine?</h2>
+            <div class="love-letter">
+                <p>Today, on this day of jokes and laughter, I'm completely serious about one thing: my feelings for you.</p>
+                
+                <p>I know April Fools' Day might make you doubt my sincerity, but I've never been more certain of anything. What started as admiration has grown into something deeper, something real.</p>
+                
+                <p>So here's my heart, offered to you without reservation or pretense. Will you take this leap with me and make us official?</p>
+            </div>
+            <p style="text-align: center; font-style: italic; margin: 30px 0;">(By Coder ShishyaCode)</p>
+            <button class="btn" id="yesBtn" onclick="showResponse(true)">YES! 💖</button>
+            <button class="btn" id="noBtn" onclick="disableAndMove()">😡 Click yes</button>
+        </div>
+        
+        <div id="responseYes" class="section hidden">
+            <span class="emoji">🎉💘🎊</span>
+            <h2>You Said YES!</h2>
+            <div class="love-letter">
+                <p>My heart is doing somersaults! I can't believe this is happening - you've just made me the happiest person alive!</p>
+                
+                <p>Wait... let me check the calendar again... is this real life? Did you really just agree to be mine on April Fools' Day?</p>
+                
+                <p>Whether this is fate's funny timing or the universe's perfect joke, I don't care - I'm just overjoyed you feel the same way!</p>
+            </div>
+            <button class="btn" onclick="showFoolPage()">😡 Dont check --kah rha hu→</button>
+        </div>
+        
+        <div id="responseNo" class="section hidden">
+            <span class="emoji">😢💔😭</span>
+            <h2>My Wounded Heart</h2>
+            <div class="love-letter">
+                <p>I understand. Maybe April Fools' Day wasn't the best time to bare my soul. The risk of being seen as a joke was worth taking for even a chance with you.</p>
+                
+                <p>Was it the timing that made you hesitate? Or is your heart just not in the same place as mine? Either way, I respect your honesty even as I nurse my bruised feelings.</p>
+                
+                <p>Thank you for considering it, and for being kind in your response. You're worth every risk, even this one.</p>
+            </div>
+            <button class="btn" onclick="showFoolPage()">What's Really Going On? →</button>
+        </div>
+        
+        <div id="foolPage" class="section fool-page hidden">
+            <span class="emoji">🤡🎭😭😭</span>
+            <h2>April fool!</h2>
+            <div class="love-letter">
+                <p>Gotcha! This whole romantic proposal was just an elaborate April Fools' prank! Or was it...?</p>
+                
+                <p>Here's the truth: while this might be April Fools' Day, every word I wrote came from the heart. The jokes on me though, because my feelings for you are 100% real.</p>
+                
+                <p>So... if by some miracle you actually meant that "yes," let's make it official for real! And if not, at least we got a good laugh out of it, right?</p>
+            </div>
+            <button class="btn" onclick="location.reload()">Read Again</button>
+        </div>
+    </div>
+
+    <script>
+        let currentSection = 1;
+        let slideIndex = 1;
+        
+        // Initialize the slideshow
+        showSlides(slideIndex);
+        
+        function nextSection() {
+            document.getElementById(`section${currentSection}`).classList.add('hidden');
+            currentSection++;
+            document.getElementById(`section${currentSection}`).classList.remove('hidden');
+            
+            // Scroll to the new section
+            document.getElementById(`section${currentSection}`).scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+        
+        function showProposal() {
+            document.getElementById(`section${currentSection}`).classList.add('hidden');
+            document.getElementById('proposal').classList.remove('hidden');
+            document.getElementById('proposal').scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+        
+        function showResponse(isYes) {
+            document.getElementById('proposal').classList.add('hidden');
+            if (isYes) {
+                document.getElementById('responseYes').classList.remove('hidden');
+                createConfetti();
+            } else {
+                document.getElementById('responseNo').classList.remove('hidden');
+            }
+            document.getElementById(isYes ? 'responseYes' : 'responseNo').scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+        
+        function showFoolPage() {
+            document.querySelector('.container').querySelectorAll('.section').forEach(section => {
+                section.classList.add('hidden');
+            });
+            document.getElementById('foolPage').classList.remove('hidden');
+            document.getElementById('foolPage').scrollIntoView({
+                behavior: 'smooth'
+            });
+            createConfetti();
+        }
+        
+        // Slideshow functions
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+        
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+        
+        function showSlides(n) {
+            let i;
+            let slides = document.getElementsByClassName("slide");
+            let dots = document.getElementsByClassName("dot");
+            if (n > slides.length) {slideIndex = 1}
+            if (n < 1) {slideIndex = slides.length}
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex-1].style.display = "block";
+            dots[slideIndex-1].className += " active";
+        }
+        
+        // Auto-advance slides
+        setInterval(() => {
+            plusSlides(1);
+        }, 5000);
+        
+        // Confetti effect
+        function createConfetti() {
+            const colors = ['#ff6b8b', '#ffb3c1', '#ffde59', '#8bd450', '#4dabf7', '#845ef7'];
+            
+            for (let i = 0; i < 150; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = `${Math.random() * 100}vw`;
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animationDuration = `${Math.random() * 3 + 2}s`;
+                confetti.style.animationDelay = `${Math.random() * 2}s`;
+                document.body.appendChild(confetti);
+                
+                // Remove confetti after animation
+                setTimeout(() => {
+                    confetti.remove();
+                }, 5000);
+            }
+        }
+    </script>
+</body>
+</html>
